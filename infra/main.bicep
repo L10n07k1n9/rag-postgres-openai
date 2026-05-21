@@ -208,9 +208,18 @@ param webAppExists bool = false
 
 var principalType = empty(runningOnGh) ? 'User' : 'ServicePrincipal'
 
-var resourceToken = toLower(uniqueString(subscription().id, name, location))
+param labInstanceId string
+
+var resourceToken = toLower(uniqueString(subscription().id, labInstanceId))
 var prefix = '${toLower(name)}-${resourceToken}'
-var tags = { 'azd-env-name': name }
+var tags = {
+  'azd-env-name': name
+  'lab-instance-id': labInstanceId
+}
+
+//var resourceToken = toLower(uniqueString(subscription().id, name, location))
+//var prefix = '${toLower(name)}-${resourceToken}'
+//var tags = { 'azd-env-name': name }
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: '${name}-rg'
