@@ -17,7 +17,7 @@ resource webIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-3
 }
 
 module app 'core/host/container-app-upsert.bicep' = {
-  name: '${serviceName}-container-app-module'
+  name: '${serviceName}containerappmodule'
   params: {
     name: name
     location: location
